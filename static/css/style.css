@@ -1,39 +1,55 @@
+/* Global Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* General Body */
 body {
-  background: #0d001a;
-  color: #fff;
+  background: radial-gradient(circle at top left, #1b0033, #0c0020);
+  color: #eae6ff;
   font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
 }
 
+/* Navbar */
 .navbar {
-  background: linear-gradient(90deg, #1a0033, #3a0066);
-  box-shadow: 0 0 15px rgba(110, 50, 255, 0.4);
+  background: linear-gradient(90deg, #2a0066, #6b00ff);
+  box-shadow: 0 0 15px rgba(160, 80, 255, 0.6);
 }
 
 .navbar-brand img {
   height: 40px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(160, 80, 255, 0.6);
+  box-shadow: 0 0 10px rgba(180, 120, 255, 0.7);
 }
 
 .navbar-brand span {
-  color: #d2b7ff;
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(180, 100, 255, 0.8);
+  font-size: 1.3rem;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(200, 140, 255, 0.8);
 }
 
+/* Glassmorphism Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* Buttons */
 .btn-gradient {
   background: linear-gradient(90deg, #7a3cff, #b266ff);
   border: none;
-  color: white;
+  color: #fff;
   font-weight: 500;
-  border-radius: 6px;
-  transition: 0.3s;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 .btn-gradient:hover {
@@ -41,10 +57,12 @@ body {
   transform: scale(1.05);
 }
 
+/* Footer */
 footer {
-  background: #12002b;
+  background: #14002b;
   color: #d2b7ff;
   text-align: center;
   padding: 15px;
   margin-top: 40px;
+  font-size: 0.9rem;
 }

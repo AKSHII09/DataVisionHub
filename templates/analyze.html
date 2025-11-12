@@ -1,87 +1,47 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Analyze - {{ filename }}</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Analyze Data | DataVision Hub</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
-  <style> img.plot { max-width:100%; height:auto; border-radius:10px; }</style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <nav class="navbar">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
   <div class="container d-flex align-items-center justify-content-between">
     <a class="navbar-brand d-flex align-items-center" href="{{ url_for('index') }}">
-      <img src="{{ url_for('static', filename='images/logo.png') }}" 
-           alt="Data Vision Hub Logo" 
-           style="height:40px; margin-right:10px; border-radius:8px;">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" style="height:40px;margin-right:10px;border-radius:8px;">
       <span>DataVision Hub</span>
     </a>
-    <div class="d-flex align-items-center">
-      {% if session.name %}
-        <span class="me-3 text-light">Hi, {{ session.name }}</span>
-        <a class="btn btn-outline-light me-2" href="{{ url_for('logout') }}">Logout</a>
-        {% if session.role == 'admin' %}
-          <a class="btn btn-primary" href="{{ url_for('admin_dashboard') }}">Admin</a>
-        {% endif %}
-      {% else %}
-        <a class="btn btn-outline-light me-2" href="{{ url_for('login') }}">Login</a>
-        <a class="btn btn-primary" href="{{ url_for('register') }}">Register</a>
-      {% endif %}
-    </div>
   </div>
 </nav>
-  <div class="container">
-    <div class="card mt-4 p-3">
-      <div class="d-flex justify-content-between">
-        <h4>Analysis — {{ filename }}</h4>
-        <a class="btn btn-outline-light" href="{{ url_for('download', filename=filename) }}">Download CSV</a>
-      </div>
 
-      <hr>
-      <div class="row">
-        <div class="col-md-8">
-          <h6>Shape: {{ shape[0] }} rows × {{ shape[1] }} cols</h6>
-          <h6>Data Types:</h6>
-          <ul>
-            {% for k,v in dtypes.items() %}
-              <li>{{ k }} : {{ v }}</li>
-            {% endfor %}
-          </ul>
+<div class="container mt-5 glass-card p-4">
+  <h3 class="text-center mb-3">Data Visualization</h3>
 
-          <div class="mt-3">
-            <h6>Descriptive Summary</h6>
-            <div>{{ describe_html|safe }}</div>
-          </div>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endwith %}
 
-          <div class="mt-3">
-            <h6>Missing Values (%)</h6>
-            <div>{{ missing_html|safe }}</div>
-          </div>
-
-          <div class="mt-3">
-            <h6>Plots</h6>
-            {% if plot_images %}
-              {% for img in plot_images %}
-                <img class="plot mb-3" src="data:image/png;base64,{{ img }}" />
-              {% endfor %}
-            {% else %}
-              <p class="text-muted">No numeric columns to plot.</p>
-            {% endif %}
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card p-3 mb-3">
-            <h6>Actions</h6>
-            <a class="btn btn-outline-primary d-block mb-2" href="{{ url_for('user_dashboard') }}">Upload another</a>
-            <a class="btn btn-outline-light d-block" href="{{ url_for('index') }}">Home</a>
-          </div>
-        </div>
-      </div>
-
+  <form method="POST" enctype="multipart/form-data" action="{{ url_for('analyze') }}">
+    <div class="mb-3">
+      <label class="form-label">Upload CSV File</label>
+      <input type="file" name="file" class="form-control" accept=".csv" required>
     </div>
+    <button type="submit" class="btn btn-gradient w-100 mt-3">Generate Visualization</button>
+  </form>
+
+  {% if plot %}
+  <div class="text-center mt-4">
+    <h5>Generated Plot:</h5>
+    <img src="{{ url_for('static', filename='images/plot.png') }}" class="img-fluid rounded shadow">
   </div>
+  {% endif %}
+</div>
+
+<footer>© 2025 DataVision Hub</footer>
 </body>
 </html>
