@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from database import init_db, add_user, get_user_by_email, get_all_users
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')  # Use non-GUI backend for Render
 import matplotlib.pyplot as plt
 import os
 
