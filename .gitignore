@@ -1,0 +1,16 @@
+# Ignore virtual environment and cache
+venv/
+__pycache__/
+
+# Ignore instance files (database)
+instance/
+
+# Ignore temporary or compiled Python files
+*.pyc
+*.pyo
+*.db
+*.sqlite3
+
+# Ignore OS or editor-specific files
+.env
+.DS_Store
