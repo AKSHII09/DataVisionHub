@@ -69,6 +69,29 @@
   </head>
 
   <body>
+    <nav class="navbar">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="navbar-brand d-flex align-items-center" href="{{ url_for('index') }}">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" 
+           alt="Data Vision Hub Logo" 
+           style="height:40px; margin-right:10px; border-radius:8px;">
+      <span>DataVision Hub</span>
+    </a>
+    <div class="d-flex align-items-center">
+      {% if session.name %}
+        <span class="me-3 text-light">Hi, {{ session.name }}</span>
+        <a class="btn btn-outline-light me-2" href="{{ url_for('logout') }}">Logout</a>
+        {% if session.role == 'admin' %}
+          <a class="btn btn-primary" href="{{ url_for('admin_dashboard') }}">Admin</a>
+        {% endif %}
+      {% else %}
+        <a class="btn btn-outline-light me-2" href="{{ url_for('login') }}">Login</a>
+        <a class="btn btn-primary" href="{{ url_for('register') }}">Register</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+
     <!-- Sidebar -->
     <div class="sidebar">
       <h4><i class="bi bi-bar-chart-fill"></i> Admin Panel</h4>

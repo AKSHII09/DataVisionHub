@@ -294,3 +294,11 @@ footer {
     font-size: 1.1rem;
   }
 }
+.navbar-brand img {
+  transition: 0.3s;
+  box-shadow: 0 0 6px rgba(155, 134, 255, 0.4);
+}
+.navbar-brand img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(155, 134, 255, 0.8);
+}
