@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Data Vision Hub</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a class="navbar-brand" href="{{ url_for('index') }}">DataVision Hub</a>
+      <div class="ms-auto">
+        {% if session.name %}
+          <span class="me-3 text-light">Hi, {{ session.name }}</span>
+          <a class="btn btn-outline-light" href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+          <a class="btn btn-outline-light me-2" href="{{ url_for('login') }}">Login</a>
+          <a class="btn btn-primary" href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="card mt-4 p-4">
+      <h2>Welcome to Data Vision Hub</h2>
+      <p class="text-muted">Upload CSVs, get quick summaries, and visualizations — built for data analysts.</p>
+      <div class="mt-3">
+        <a class="btn btn-primary" href="{{ url_for('register') }}">Get Started</a>
+        <a class="btn btn-outline-light" href="{{ url_for('login') }}">Login</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Data Vision Hub</p>
+  </footer>
+</body>
+</html>
